@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src = "lib.js"></script>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <main class = "main">
+        <header class = "header">
+            <h1>Library</h1>
+        </header>
+
+        <div class = "data">
+            <p class = "read"> Read Books: </p>
+            <p class = "unred"> Unread Books: </p>
+            <p class = "totalBooks"> Total Books: </p>
+        </div>
+
+        <div class = "addBook">
+            <button id = "add">Add a book</button>
+        </div>
+        
+        <div class = "removeBook">
+            <button class = "remove">Remove a book</button>
+            <input class = "rmTitle" type = "text" required>
+        </div>
+        <div class = "library">
+            <table class = "lib-table">
+            </table>
+        </div>
+
+        <div class = "input">
+            <form class = "form">
+                <input id = "title" type = "text" required>
+                <input id = "author" type = "text" required>
+                <input id = "page" type = "text" required>
+                <input id = "read" type = "checkbox" required>
+            </form>
+        </div>
+    </main>
+    <footer class = "footer">
+        <p>Copyright © 2021 noodaj</p>
+    </footer>
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
-    <script src = "lib.js"></script>
+    <script src = "lib.js" defer></script>
     <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
@@ -15,7 +15,11 @@
         </header>
 
         <div class = "data">
-            <p class = "read"> Read Books: </p>
+                <p class = "read"> Read Books: </p>
+            <div class = "read" id = "readHeader"> 
+                <ul id = "booksRead"></ul>
+            </div>
+
             <p class = "unred"> Unread Books: </p>
             <p class = "totalBooks"> Total Books: </p>
         </div>
@@ -25,11 +29,15 @@
         </div>
         
         <div class = "removeBook">
-            <button class = "remove">Remove a book</button>
-            <input class = "rmTitle" type = "text" required>
+            <button id = "remove">Remove a book</button>
+            <input id = "rmTitle" type = "text" required>
         </div>
-        <div class = "library">
-            <table class = "lib-table">
+
+        <div class = "clearLib">
+            <button id = "clear">Clear</button>
+        </div>
+        <div id = "library">
+            <table id = "lib-table">
             </table>
         </div>
 
@@ -37,6 +45,7 @@
             <form class = "form">
                 <input id = "title" type = "text" required>
                 <input id = "author" type = "text" required>
+                <input id = "pagesRead" type = "text" required>
                 <input id = "page" type = "text" required>
                 <input id = "read" type = "checkbox" required>
             </form>

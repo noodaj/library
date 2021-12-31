@@ -1,0 +1,30 @@
+:root{
+    --main-bg: #2C2F33;
+    --lib-bg: #23272A;
+    --text: #fff;
+    --sectionColor: #7289DA;
+    --font: Roboto;
+}
+html{
+    position: relative;
+    font-family: var(--font);
+}
+
+body{
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: var(--main-bg);
+    color: var(--text);
+}
+
+h1{
+    font-size: 40px;
+    text-align: center;
+}
+
+.main{
+    background-color: var(--lib-bg);
+    border-radius: 10px;
+    padding: 0px 15px 15px 10px;
+}

@@ -6,8 +6,11 @@ const pagesRead = document.getElementById('pagesRead')
 const read = document.getElementById('read')
 const remove = document.getElementById('remove')
 const rmvTitle = document.getElementById('rmTitle')
-const readHeader = document.getElementById('readHeader')
+const readHeader = document.getElementById('booksRead')
+const unread = document.getElementById('unreadBooks')
+const total = document.getElementById('totalBooks')
 
+//book class 
 class Book {
     constructor(title, author, pagesRead, pages, read) {
         this.title = title;
@@ -17,17 +20,15 @@ class Book {
         this.read = read;
         this.index = null;
     }
-
-    print() {
-        console.log(`Book ${this.title} Author ${this.author} Pages Read ${this.pagesRead} Pages ${this.pages} ${this.read}`)
-    }
 }
 
+//library class 
 class lib {
     constructor() {
         this.books = []
     }
 
+    //checks if curr book is in lib if not adds the book 
     addBook(book) {
         if (!this.inLib(book)) {
             console.log('pushed')
@@ -39,27 +40,21 @@ class lib {
         }
     }
 
-    rmBook(title) {
-        this.books = this.books.filter((book) => book.title !== title)
-    }
+    //removes a book 
+    rmBook(title) { this.books = this.books.filter((book) => book.title !== title) }
 
-    inLib(book) {
-        return this.books.some(item => item.title === book.title)
-    }
+    //checks if book is in lib 
+    inLib(book) { return this.books.some(item => item.title === book.title)}
 
-    size() {
-        return this.books.length
-    }
+    size() { return this.books.length }
 
-    clearLib() {
-        this.books = [];
-    }
+    clearLib() {this.books = [];}
 }
 
+//creates new lib 
 let library = new lib()
 
-const addBook = (e) => {
-    e.preventDefault()
+const addBook = () => {
     let book = getData()
     library.addBook(book)
     reset()
@@ -71,16 +66,15 @@ let getData = () => {
 }
 
 let reset = () => {
+    if(clear.onlick){
+        library.clearLib();
+    }
     curTable.innerHTML = ''
     readHeader.innerHTML = ''
+    total.innerHTML = ''
+    unread.innerHTML = ''
 }
 
-let clear = () => {
-    library.clearLib();
-    curTable.innerHTML = ''
-    readHeader.innerHTML = ''
-
-}
 function removeBook() {
     library.rmBook(title)
 }
@@ -101,27 +95,41 @@ function showLib() {
             curTable.append(libTable)
 
             if (book.read === 'true') {
-                console.log(`${book.title} has been read`)
                 let read = document.createElement('li')
-                read.innerHTML = ` ${book.title}`
+                read.innerHTML = `${book.title}`
                 readHeader.append(read)
             }
-            else {
-                let read = document.createElement('li')
-                read.innerHTML = ` ${book.title}`
-                readHeader.append(read)
+            else if (book.read === 'false'){
+                let notread = document.createElement('li')
+                notread.innerHTML = `${book.title}`
+                unread.append(notread)
             }
+
+            let curBook = document.createElement('li')
+
+            curBook.innerHTML = `${book.title} with ${findPercentage(book)}% read`
+            total.append(curBook)
         }
     })
 }
 
 let findPercentage = (book) => ((Number(book.pagesRead) / Number(book.pages)) * 100).toPrecision(4)
 
+let addBtn = document.getElementById('add').addEventListener('click', (e) => {
+    e.preventDefault()
+    if(title.value.length == 0 || author.value.length == 0 || pagesRead.value.length == 0 || page.value.length == 0 ){
+        alert('Fill in all blanks')
+    }
+    else{
+        addBook()
+    }
+    title.value = author.value = pagesRead.value = page.value = ''
+})
 
-let addBtn = document.getElementById('add').addEventListener('click', addBook)
 let rmvBtn = document.getElementById('remove').addEventListener('click', console.log(rmvTitle.value))
-let clearBtn = document.getElementById('clear').addEventListener('click', clear)
+let clearBtn = document.getElementById('clear').addEventListener('click', reset)
 
+// testing 
 const book1 = new Book('Harry Potter', 'JK Rowling', 220, 223, 'true')
 const book2 = new Book('Chamber of Secrets', 'JK Rowling', 120, 251, 'false')
 

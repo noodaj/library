@@ -24,7 +24,88 @@ h1{
 }
 
 .main{
+    position: inherit;
     background-color: var(--lib-bg);
     border-radius: 10px;
-    padding: 0px 15px 15px 10px;
+    padding: 0px 10px 15px 10px;
+}
+
+.data, #library{
+    position: relative;
+    padding-left: 10px;
+    border: 2px solid var(--main-bg);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.nav{
+    display: flex;
+    justify-content: center; 
+    border: 2px solid var(--main-bg);
+    padding: 5px;
+    border-radius: 10px;
+    
+}
+
+.nav button{
+    margin: 0px 10px;
+    width: 5em;
+    height: 3em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #E1D9D1;
+}
+
+.input{
+    display: none;   
+    padding: 10px 0px; 
+}
+
+.input.on{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(var(--main-bg), 0.2); 
+    backdrop-filter: blur(5px);
+
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input input[type = "text"], input[type = "number"]{
+    width: 15rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+}
+
+.input button{
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 75px;
+    height: 20px;
+}
+
+.footer{
+    text-align: center;
 }

@@ -24,8 +24,8 @@
             <p class="totalBooks"> Total Books: </p>
             <ul id="totalBooks"></ul>
         </div>
-
         <div id="library">
+            <p>Your Current Library Contains:</p>
             <table id="lib-table">
             </table>
         </div>
@@ -37,20 +37,24 @@
 
             <div class="removeBook">
                 <button id="remove">Remove a book</button>
-                <input id="rmTitle" type="text" required>
+                <input id="rmTitle" type="text" placeholder = "Title of Book"required>
             </div>
 
             <div class="clearLib">
                 <button id="clear">Clear</button>
             </div>
         </div>
+
         <div class="input">
             <form class="form">
-                <input id="title" type="text" required>
-                <input id="author" type="text" required>
-                <input id="pagesRead" type="number" required>
-                <input id="page" type="number" required>
-                <input id="read" type="checkbox" required>
+                <input id="title" type="text" placeholder = "Title" required>
+                <input id="author" type="text" placeholder = "Author" required>
+                <input id="pagesRead" type="number" placeholder = "Pages Read" required>
+                <input id="page" type="number" placeholder = "Pages Total"required>
+                <label for = "read" style = "margin-top: 5px;">Read?
+                    <input id="read" type="checkbox" placeholder = "Read?" required>
+                </label>
+                <button id = "submit">Submit</button>
             </form>
         </div>
     </main>

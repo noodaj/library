@@ -9,6 +9,7 @@ const rmvTitle = document.getElementById('rmTitle')
 const readHeader = document.getElementById('booksRead')
 const unread = document.getElementById('unreadBooks')
 const total = document.getElementById('totalBooks')
+const input = document.querySelector('.input')
 
 //book class 
 class Book {
@@ -18,7 +19,6 @@ class Book {
         this.pagesRead = pagesRead;
         this.pages = pages
         this.read = read;
-        this.index = null;
     }
 }
 
@@ -46,14 +46,14 @@ class lib {
     //checks if book is in lib 
     inLib(book) { return this.books.some(item => item.title === book.title)}
 
-    size() { return this.books.length }
-
+    //clears the library 
     clearLib() {this.books = [];}
 }
 
 //creates new lib 
 let library = new lib()
 
+//function to add a new book to the library 
 const addBook = () => {
     let book = getData()
     library.addBook(book)
@@ -66,9 +66,6 @@ let getData = () => {
 }
 
 let reset = () => {
-    if(clear.onlick){
-        library.clearLib();
-    }
     curTable.innerHTML = ''
     readHeader.innerHTML = ''
     total.innerHTML = ''
@@ -77,15 +74,16 @@ let reset = () => {
 
 function removeBook() {
     library.rmBook(title)
+    reset()
+    showLib()
 }
 
 function showLib() {
     library.books.forEach(book => {
         if (library.inLib(book)) {
             let libTable = document.createElement('tr')
-            //libTable.classList.add('')
             libTable.innerHTML =
-                `Title: ${book.title} 
+            `Title: ${book.title}\n
             Author: ${book.author}
             Pages Read: ${book.pagesRead}
             Pages: ${book.pages}
@@ -94,12 +92,12 @@ function showLib() {
             `
             curTable.append(libTable)
 
-            if (book.read === 'true') {
+            if (book.read == 'true') {
                 let read = document.createElement('li')
                 read.innerHTML = `${book.title}`
                 readHeader.append(read)
             }
-            else if (book.read === 'false'){
+            else if (book.read == 'false'){
                 let notread = document.createElement('li')
                 notread.innerHTML = `${book.title}`
                 unread.append(notread)
@@ -115,24 +113,49 @@ function showLib() {
 
 let findPercentage = (book) => ((Number(book.pagesRead) / Number(book.pages)) * 100).toPrecision(4)
 
-let addBtn = document.getElementById('add').addEventListener('click', (e) => {
-    e.preventDefault()
+let addBtn = document.getElementById('add').addEventListener('click', () => {
+    input.classList.add('on')
+})
+
+let closeModal = (e) => {
+    if(e.key === 'Escape'){
+        input.classList.remove('on')
+    }
+}
+window.onkeydown = closeModal
+
+let submit = document.getElementById('submit').addEventListener('click', () => {
     if(title.value.length == 0 || author.value.length == 0 || pagesRead.value.length == 0 || page.value.length == 0 ){
         alert('Fill in all blanks')
     }
     else{
         addBook()
     }
-    title.value = author.value = pagesRead.value = page.value = ''
+    
+    title.value = '' 
+    author.value = ''
+    pagesRead.value = page.value = ''
+    input.classList.remove('on')
 })
 
-let rmvBtn = document.getElementById('remove').addEventListener('click', console.log(rmvTitle.value))
-let clearBtn = document.getElementById('clear').addEventListener('click', reset)
+let rmvBtn = document.getElementById('remove').addEventListener('click', () => {
+    let title = document.getElementById('rmTitle').value.toLowerCase();
+    library.rmBook(title)
+    reset()
+    showLib()
+    title.value = ''
+})
 
-// testing 
+let clearBtn = document.getElementById('clear').addEventListener('click', () =>{
+    library.clearLib();
+    reset();
+})
+
+/*
 const book1 = new Book('Harry Potter', 'JK Rowling', 220, 223, 'true')
 const book2 = new Book('Chamber of Secrets', 'JK Rowling', 120, 251, 'false')
 
 library.addBook(book1)
 library.addBook(book2)
 showLib()
+*/

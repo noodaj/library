@@ -31,12 +31,8 @@ class lib {
     //checks if curr book is in lib if not adds the book 
     addBook(book) {
         if (!this.inLib(book)) {
-            console.log('pushed')
             this.books.push(book);
             book.index = this.books.length
-        }
-        else {
-            console.log('not new book')
         }
     }
 
@@ -80,16 +76,23 @@ function removeBook() {
 
 function showLib() {
     library.books.forEach(book => {
+        let status = ''
+        if(book.read === 'false'){
+            status = 'Unread'
+        }
+        else{
+            status = 'Read'
+        }
         if (library.inLib(book)) {
             let libTable = document.createElement('tr')
             libTable.innerHTML =
-            `Title: ${book.title}\n
-            Author: ${book.author}
-            Pages Read: ${book.pagesRead}
-            Pages: ${book.pages}
-            Percentage: ${findPercentage(book)}%
-            Read: ${book.read}
-            `
+                `Title: ${book.title}\n
+                Author: ${book.author}
+                Pages Read: ${book.pagesRead}
+                Pages: ${book.pages}
+                Percentage: ${findPercentage(book)}%
+                Status: ${status}
+                `
             curTable.append(libTable)
 
             if (book.read == 'true') {
@@ -99,8 +102,12 @@ function showLib() {
             }
             else if (book.read == 'false'){
                 let notread = document.createElement('li')
+                let checkbox = document.createElement('input')
+                checkbox.type = 'checkbox'
+                checkbox.id = 'readChange'
                 notread.innerHTML = `${book.title}`
                 unread.append(notread)
+                unread.append(checkbox)
             }
 
             let curBook = document.createElement('li')
@@ -110,6 +117,10 @@ function showLib() {
         }
     })
 }
+
+
+let changeStatus = document.getElementById('readChange');
+console.log(changeStatus)
 
 let findPercentage = (book) => ((Number(book.pagesRead) / Number(book.pages)) * 100).toPrecision(4)
 
@@ -131,19 +142,15 @@ let submit = document.getElementById('submit').addEventListener('click', () => {
     else{
         addBook()
     }
-    
-    title.value = '' 
-    author.value = ''
-    pagesRead.value = page.value = ''
+
     input.classList.remove('on')
 })
 
 let rmvBtn = document.getElementById('remove').addEventListener('click', () => {
-    let title = document.getElementById('rmTitle').value.toLowerCase();
+    let title = document.getElementById('rmTitle').value;
     library.rmBook(title)
     reset()
     showLib()
-    title.value = ''
 })
 
 let clearBtn = document.getElementById('clear').addEventListener('click', () =>{
@@ -151,11 +158,10 @@ let clearBtn = document.getElementById('clear').addEventListener('click', () =>{
     reset();
 })
 
-/*
+
 const book1 = new Book('Harry Potter', 'JK Rowling', 220, 223, 'true')
 const book2 = new Book('Chamber of Secrets', 'JK Rowling', 120, 251, 'false')
 
 library.addBook(book1)
 library.addBook(book2)
 showLib()
-*/

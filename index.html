@@ -37,7 +37,7 @@
 
             <div class="removeBook">
                 <button id="remove">Remove a book</button>
-                <input id="rmTitle" type="text" placeholder = "Title of Book"required>
+                <input id="rmTitle" type="text" placeholder = "Title of Book" onfocus ="this.value = ''" required>
             </div>
 
             <div class="clearLib">
@@ -47,10 +47,10 @@
 
         <div class="input">
             <form class="form">
-                <input id="title" type="text" placeholder = "Title" required>
-                <input id="author" type="text" placeholder = "Author" required>
-                <input id="pagesRead" type="number" placeholder = "Pages Read" required>
-                <input id="page" type="number" placeholder = "Pages Total"required>
+                <input id="title" type="text" placeholder = "Title" onfocus ="this.value = ''"required>
+                <input id="author" type="text" placeholder = "Author" onfocus ="this.value = ''" required>
+                <input id="pagesRead" type="number" placeholder = "Pages Read" onfocus ="this.value = ''" required>
+                <input id="page" type="number" placeholder = "Pages Total" onfocus ="this.value = ''"required>
                 <label for = "read" style = "margin-top: 5px;">Read?
                     <input id="read" type="checkbox" placeholder = "Read?" required>
                 </label>
